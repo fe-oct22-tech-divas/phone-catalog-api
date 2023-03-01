@@ -9,7 +9,7 @@ const app = express();
 
 app.use(cors());
 
-app.use('/phones', phoneRouter);
+app.use('/products', phoneRouter);
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

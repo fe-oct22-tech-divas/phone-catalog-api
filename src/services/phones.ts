@@ -23,7 +23,7 @@ export const getAll = async(limit: number, offset: number) => {
 export const getById = async(phoneId: string) => {
   const phones = await readData();
   const foundPhone = phones.find(
-    (phone: { id: string; }) => phone.id === phoneId,
+    (phone: { id: string }) => phone.id === phoneId,
   );
 
   return foundPhone || null;
