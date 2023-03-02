@@ -1,0 +1,32 @@
+{
+  "development": {
+    "username": "Fynkzia",
+    "password": "tFpeIsbJ94Ra",
+    "database": "neondb",
+    "host": "ep-weathered-dew-507415.eu-central-1.aws.neon.tech",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": true
+    }
+  },
+  "test": {
+    "username": "Fynkzia",
+    "password": "tFpeIsbJ94Ra",
+    "database": "neondb",
+    "host": "ep-weathered-dew-507415.eu-central-1.aws.neon.tech",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": true
+    }
+  },
+  "production": {
+    "username": "Fynkzia",
+    "password": "tFpeIsbJ94Ra",
+    "database": "neondb",
+    "host": "ep-weathered-dew-507415.eu-central-1.aws.neon.tech",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": true
+    }
+  }
+}
