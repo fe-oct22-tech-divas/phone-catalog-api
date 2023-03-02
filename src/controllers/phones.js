@@ -1,9 +1,8 @@
 'use strict';
 
-import express from 'express';
-import * as phoneServices from '../services/phones';
+import * as phoneServices from '../services/phones.js';
 
-export const getAll = async(req: express.Request, res: express.Response) => {
+export const getAll = async(req, res) => {
   const { limit, offset } = req.query;
 
   const limitNum = Number(limit);
@@ -19,7 +18,7 @@ export const getAll = async(req: express.Request, res: express.Response) => {
   }
 };
 
-export const getById = async(req: express.Request, res: express.Response) => {
+export const getById = async(req, res) => {
   const { phoneId } = req.params;
 
   if (!phoneId) {

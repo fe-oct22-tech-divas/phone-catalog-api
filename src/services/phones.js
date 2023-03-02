@@ -7,7 +7,7 @@ async function readData() {
   return JSON.parse(data);
 }
 
-export const getAll = async(limit: number, offset: number) => {
+export const getAll = async(limit, offset) => {
   let phones = await readData();
 
   if (limit && offset) {
@@ -20,10 +20,10 @@ export const getAll = async(limit: number, offset: number) => {
   return phones;
 };
 
-export const getById = async(phoneId: string) => {
+export const getById = async(phoneId) => {
   const phones = await readData();
   const foundPhone = phones.find(
-    (phone: { id: string }) => phone.id === phoneId,
+    phone => phone.id === phoneId,
   );
 
   return foundPhone || null;
