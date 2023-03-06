@@ -46,6 +46,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-  await queryInterface.bulkDelete(PhoneDetails.tableName, null, {});
+    await queryInterface.bulkDelete(PhoneDetails.tableName, null, {});
   },
 };

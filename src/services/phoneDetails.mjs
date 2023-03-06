@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import * as PhoneDetails from '../../models/PhoneDetails.js';
+import db from '../../models/index.js';
 
 function normalize(phone) {
   const copyOfPhone = _.cloneDeep(phone);
@@ -11,7 +11,7 @@ function normalize(phone) {
 }
 
 function findById(phoneId) {
-  return PhoneDetails.findByPk(phoneId);
+  return db.PhoneDetails.findByPk(phoneId);
 }
 
 export const phoneDetailsServices = {
