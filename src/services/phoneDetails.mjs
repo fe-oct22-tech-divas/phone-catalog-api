@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import * as PhoneDetails from '../../db/models/PhoneDetails.js';
+import * as PhoneDetails from '../../models/PhoneDetails.js';
 
 function normalize(phone) {
   const copyOfPhone = _.cloneDeep(phone);

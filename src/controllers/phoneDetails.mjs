@@ -1,4 +1,4 @@
-import { phoneDetailsServices } from '../services/phoneDetails.js';
+import { phoneDetailsServices } from '../services/phoneDetails.mjs';
 
 const getOne = async(req, res) => {
   const { phoneId } = req.params;

@@ -2,9 +2,9 @@
 // @ts-nocheck
 'use strict';
 
-import { Model } from 'sequelize';
+const { Model } = require('sequelize');
 
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   class PhoneDetails extends Model {
     /**
      * Helper method for defining associations.
@@ -16,33 +16,36 @@ export default (sequelize, DataTypes) => {
     }
   }
 
-  PhoneDetails.init({
-    id: {
-      type: DataTypes.STRING,
-      primaryKey: true,
+  PhoneDetails.init(
+    {
+      id: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+      },
+      name: DataTypes.STRING,
+      namespaceId: DataTypes.STRING,
+      capacityAvailable: DataTypes.ARRAY(DataTypes.STRING),
+      capacity: DataTypes.STRING,
+      priceRegular: DataTypes.INTEGER,
+      priceDiscount: DataTypes.INTEGER,
+      colorsAvailable: DataTypes.ARRAY(DataTypes.STRING),
+      color: DataTypes.STRING,
+      images: DataTypes.ARRAY(DataTypes.STRING),
+      description: DataTypes.JSONB,
+      screen: DataTypes.STRING,
+      resolution: DataTypes.STRING,
+      processor: DataTypes.STRING,
+      ram: DataTypes.STRING,
+      camera: DataTypes.STRING,
+      zoom: DataTypes.STRING,
+      cell: DataTypes.ARRAY(DataTypes.STRING),
     },
-    name: DataTypes.STRING,
-    namespaceId: DataTypes.STRING,
-    capacityAvailable: DataTypes.ARRAY(DataTypes.STRING),
-    capacity: DataTypes.STRING,
-    priceRegular: DataTypes.INTEGER,
-    priceDiscount: DataTypes.INTEGER,
-    colorsAvailable: DataTypes.ARRAY(DataTypes.STRING),
-    color: DataTypes.STRING,
-    images: DataTypes.ARRAY(DataTypes.STRING),
-    description: DataTypes.JSONB,
-    screen: DataTypes.STRING,
-    resolution: DataTypes.STRING,
-    processor: DataTypes.STRING,
-    ram: DataTypes.STRING,
-    camera: DataTypes.STRING,
-    zoom: DataTypes.STRING,
-    cell: DataTypes.ARRAY(DataTypes.STRING),
-  }, {
-    sequelize,
-    modelName: 'PhoneDetails',
-    createdAt: true,
-    updatedAt: false,
-  });
+    {
+      sequelize,
+      modelName: 'PhoneDetails',
+      createdAt: true,
+      updatedAt: false,
+    }
+  );
   return PhoneDetails;
 };

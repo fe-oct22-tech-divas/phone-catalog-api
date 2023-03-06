@@ -2,18 +2,25 @@
   "id": "apple-iphone-xs-max-64gb-gold",
   "namespaceId": "apple-iphone-xs-max",
   "name": "Apple iPhone XS Max 64GB Gold",
-  "capacityAvailable": ["64GB", "256GB"],
+  "capacityAvailable": [
+    "64GB",
+    "256GB"
+  ],
   "capacity": "64GB",
   "priceRegular": 960,
   "priceDiscount": 900,
-  "colorsAvailable": ["spacegray", "gold", "silver"],
+  "colorsAvailable": [
+    "spacegray",
+    "gold",
+    "silver"
+  ],
   "color": "gold",
   "images": [
-    "img/phones/apple-iphone-xs-max/gold/00.jpg",
-    "img/phones/apple-iphone-xs-max/gold/01.jpg",
-    "img/phones/apple-iphone-xs-max/gold/02.jpg",
-    "img/phones/apple-iphone-xs-max/gold/03.jpg",
-    "img/phones/apple-iphone-xs-max/gold/04.jpg"
+    "https://raw.githubusercontent.com/fe-oct22-tech-divas/phone-catalog-images/main/phones/apple-iphone-xs-max/gold/00.jpg",
+    "https://raw.githubusercontent.com/fe-oct22-tech-divas/phone-catalog-images/main/phones/apple-iphone-xs-max/gold/01.jpg",
+    "https://raw.githubusercontent.com/fe-oct22-tech-divas/phone-catalog-images/main/phones/apple-iphone-xs-max/gold/02.jpg",
+    "https://raw.githubusercontent.com/fe-oct22-tech-divas/phone-catalog-images/main/phones/apple-iphone-xs-max/gold/03.jpg",
+    "https://raw.githubusercontent.com/fe-oct22-tech-divas/phone-catalog-images/main/phones/apple-iphone-xs-max/gold/04.jpg"
   ],
   "description": [
     {
@@ -42,5 +49,12 @@
   "ram": "4GB",
   "camera": "12 Mp + 12 Mp + 7MP",
   "zoom": "Digital, 10x / Optical, 2x",
-  "cell": ["GPRS", "EDGE", "WCDMA", "UMTS", "HSPA", "LTE"]
+  "cell": [
+    "GPRS",
+    "EDGE",
+    "WCDMA",
+    "UMTS",
+    "HSPA",
+    "LTE"
+  ]
 }

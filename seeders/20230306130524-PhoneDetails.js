@@ -5,13 +5,10 @@ const { PhoneDetails } = require('../models');
 
 const fs = require('fs/promises');
 const path = require('path');
-
-const imgURI = 'https://raw.githubusercontent.com/'
-  + 'fe-oct22-tech-divas/phone-catalog-images/main/';
-const directoryPath = path.join(path.dirname(__dirname), '/phonesData');
+const directoryPath = path.join(path.dirname(__dirname), 'phonesData/phones');
 const phones = [];
 
-const readJsonFiles = async() => {
+const readJsonFiles = async () => {
   const files = await fs.readdir(directoryPath, (err) => {
     if (err) {
       return 'Error reading directory: ' + err;
@@ -21,12 +18,14 @@ const readJsonFiles = async() => {
   for (const file of files) {
     if (path.extname(file) === '.json') {
       try {
-        const jsonData = await fs.readFile(path.join(directoryPath, file), 'utf-8');
+        const jsonData = await fs.readFile(
+          path.join(directoryPath, file),
+          'utf-8'
+        );
         const data = JSON.parse(jsonData);
 
         Object.assign(data, { createdAt: new Date() });
         data.description = JSON.stringify(data.description);
-        data.images = data.images.map((img) => imgURI + img.slice(0, 4));
         phones.push(data);
       } catch (e) {
         console.error(`Error parsing JSON file ${file}: ${e}`);
@@ -35,16 +34,18 @@ const readJsonFiles = async() => {
   }
 };
 
-const initPhones = async() => {
+const initPhones = async () => {
   await readJsonFiles();
 };
 
 /** @type {import('sequelize-cli').Migration} */
-export async function up(queryInterface) {
-  await initPhones();
-  await queryInterface.bulkInsert(PhoneDetails.tableName, phones, {});
-}
+module.exports = {
+  async up(queryInterface) {
+    await initPhones();
+    await queryInterface.bulkInsert(PhoneDetails.tableName, phones, {});
+  },
 
-export async function down(queryInterface) {
+  async down(queryInterface) {
   await queryInterface.bulkDelete(PhoneDetails.tableName, null, {});
-}
+  },
+};

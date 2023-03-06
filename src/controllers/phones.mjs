@@ -1,5 +1,5 @@
-import { phonesServices } from '../services/phones.js';
-import { SortBy } from '../types/SortBy.js';
+import { phonesServices } from '../services/phones.mjs';
+import { SortBy } from '../types/SortBy.mjs';
 
 const getMany = async(req, res) => {
   const normilizedUrl = new URL(req.url, `http://${req.headers.host}`);
@@ -8,11 +8,7 @@ const getMany = async(req, res) => {
   const perPage = Number(params.get('perPage')) || 16;
   const sortBy = params.get('sortBy') || SortBy.Newest;
 
-  const loadPhones = await phonesServices.getMany(
-    page,
-    perPage,
-    sortBy,
-  );
+  const loadPhones = await phonesServices.getMany(page, perPage, sortBy);
 
   res.send({
     data: loadPhones.result,

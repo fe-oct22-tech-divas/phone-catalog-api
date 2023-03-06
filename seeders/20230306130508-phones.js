@@ -20,9 +20,12 @@ const readJsonFiles = async() => {
     if (path.extname(file) === '.json') {
       try {
         // eslint-disable-next-line max-len
-        const jsonData = await fs.readFile(path.join(directoryPath, file), 'utf-8');
-        const data = JSON.parse(jsonData)
-          .map(eachData => Object.assign(eachData, { createdAt: new Date() }));
+        const jsonData = await fs.readFile(
+          path.join(directoryPath, file),
+          'utf-8',
+        );
+        const data = JSON.parse(jsonData).map((eachData) =>
+          Object.assign(eachData, { createdAt: new Date() }));
 
         phones.push(...data);
       } catch (e) {

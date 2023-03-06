@@ -2,9 +2,9 @@
 // @ts-nocheck
 'use strict';
 
-import { Model } from 'sequelize';
+const { Model } = require('sequelize');
 
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   class Phones extends Model {
     /**
      * Helper method for defining associations.
@@ -19,7 +19,7 @@ export default (sequelize, DataTypes) => {
     {
       id: {
         type: DataTypes.STRING,
-        primaryKey: true
+        primaryKey: true,
       },
       category: DataTypes.STRING,
       phoneId: DataTypes.STRING,

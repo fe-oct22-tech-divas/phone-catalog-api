@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 
-import { router as phoneDetailsRouter } from '../src/routes/phoneDetails.js';
-import { router as phonesRouter } from '../src/routes/phones.js';
+import { phoneDetailsRouter } from './routes/phoneDetails.mjs';
+import { phonesRouter } from './routes/phones.mjs';
 
 const PORT = process.env.PORT || 5000;
 

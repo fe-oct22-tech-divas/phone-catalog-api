@@ -1,5 +1,5 @@
-import { SortBy } from '../types/SortBy.js';
-import * as Phones from '../../db/models/Phones.js';
+import { SortBy } from '../types/SortBy.mjs';
+import * as Phones from '../../models/Phones.js';
 
 function normalize(phone) {
   const copyOfPhone = { ...phone };
@@ -9,11 +9,7 @@ function normalize(phone) {
   return copyOfPhone;
 }
 
-async function getMany(
-  page,
-  perPage,
-  sortBy,
-) {
+async function getMany(page, perPage, sortBy) {
   let loadedData;
 
   switch (sortBy) {
