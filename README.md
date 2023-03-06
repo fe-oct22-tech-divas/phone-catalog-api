@@ -2,6 +2,8 @@
 
 /products
 
-/products?limit=20&offset=0 (pagination)
-
 /products/2 (getbyId)
+
+/product_details/apple-iphone-7-32gb-black (get full information)
+
+
