@@ -1,40 +1,46 @@
-'use strict';
+import { phonesServices } from '../services/phones.js';
+import { SortBy } from '../types/SortBy.js';
 
-import * as phoneServices from '../services/phones.js';
+const getMany = async(req, res) => {
+  const normilizedUrl = new URL(req.url, `http://${req.headers.host}`);
+  const params = normilizedUrl.searchParams;
+  const page = Number(params.get('page')) || 1;
+  const perPage = Number(params.get('perPage')) || 16;
+  const sortBy = params.get('sortBy') || SortBy.Newest;
 
-export const getAll = async(req, res) => {
-  const { limit, offset } = req.query;
+  const loadPhones = await phonesServices.getMany(
+    page,
+    perPage,
+    sortBy,
+  );
 
-  const limitNum = Number(limit);
-  const offsetNum = Number(offset);
+  res.send({
+    data: loadPhones.result,
+    total: loadPhones.loadedData,
+  });
+};
+
+const getOne = async(req, res) => {
+  const { phoneId } = req.params;
 
   try {
-    const phones = await phoneServices.getAll(limitNum, offsetNum);
+    const findPhoneById = await phonesServices.findById(phoneId);
 
-    res.send(phones);
-  } catch (e) {
-    res.statusCode = 404;
-    res.send();
+    if (!findPhoneById) {
+      res.sendStatus(404);
+
+      return;
+    }
+
+    res.send(phonesServices.normalize(findPhoneById.get({ plain: true })));
+
+    return findPhoneById;
+  } catch (err) {
+    res.sendStatus(500);
   }
 };
 
-export const getById = async(req, res) => {
-  const { phoneId } = req.params;
-
-  if (!phoneId) {
-    res.sendStatus(400);
-
-    return;
-  }
-
-  const foundPhone = await phoneServices.getById(phoneId);
-
-  if (!foundPhone) {
-    res.sendStatus(404);
-
-    return;
-  }
-
-  res.statusCode = 200;
-  res.send(foundPhone);
+export const phonesControllers = {
+  getMany,
+  getOne,
 };

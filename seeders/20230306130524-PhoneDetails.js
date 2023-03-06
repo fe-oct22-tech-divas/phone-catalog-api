@@ -1,27 +1,27 @@
-/* eslint-disable no-console */
+/* eslint-disable */
 'use strict';
 
-import { Phone } from '../models';
+const { PhoneDetails } = require('../models');
 
-import { readdir, readFile } from 'fs/promises';
-import { join, dirname, extname } from 'path';
+const fs = require('fs/promises');
+const path = require('path');
 
 const imgURI = 'https://raw.githubusercontent.com/'
   + 'fe-oct22-tech-divas/phone-catalog-images/main/';
-const directoryPath = join(dirname(__dirname), '/phonesData');
+const directoryPath = path.join(path.dirname(__dirname), '/phonesData');
 const phones = [];
 
 const readJsonFiles = async() => {
-  const files = await readdir(directoryPath, (err) => {
+  const files = await fs.readdir(directoryPath, (err) => {
     if (err) {
       return 'Error reading directory: ' + err;
     }
   });
 
   for (const file of files) {
-    if (extname(file) === '.json') {
+    if (path.extname(file) === '.json') {
       try {
-        const jsonData = await readFile(join(directoryPath, file), 'utf-8');
+        const jsonData = await fs.readFile(path.join(directoryPath, file), 'utf-8');
         const data = JSON.parse(jsonData);
 
         Object.assign(data, { createdAt: new Date() });
@@ -42,9 +42,9 @@ const initPhones = async() => {
 /** @type {import('sequelize-cli').Migration} */
 export async function up(queryInterface) {
   await initPhones();
-  await queryInterface.bulkInsert(Phone.tableName, phones, {});
+  await queryInterface.bulkInsert(PhoneDetails.tableName, phones, {});
 }
 
 export async function down(queryInterface) {
-  await queryInterface.bulkDelete(Phone.tableName, null, {});
+  await queryInterface.bulkDelete(PhoneDetails.tableName, null, {});
 }

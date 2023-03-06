@@ -1,15 +1,12 @@
 'use strict';
-
-import { Phone } from '../models';
-
 /** @type {import('sequelize-cli').Migration} */
-export async function up(queryInterface, Sequelize) {
-  await queryInterface.createTable(
-    Phone.tableName,
-    {
+
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('PhoneDetails', {
       id: {
-        type: Sequelize.STRING,
         primaryKey: true,
+        type: Sequelize.STRING,
       },
       namespaceId: {
         type: Sequelize.STRING,
@@ -28,11 +25,11 @@ export async function up(queryInterface, Sequelize) {
         allowNull: false,
       },
       priceRegular: {
-        type: Sequelize.DECIMAL(10, 2),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       priceDiscount: {
-        type: Sequelize.DECIMAL(10, 2),
+        type: Sequelize.INTEGER,
         allowNull: true,
       },
       colorsAvailable: {
@@ -87,10 +84,9 @@ export async function up(queryInterface, Sequelize) {
     },
     {
       updatedAt: false,
-    },
-  );
-}
-
-export async function down(queryInterface) {
-  await queryInterface.dropTable(Phone.tableName);
-}
+    });
+  },
+  async down(queryInterface) {
+    await queryInterface.dropTable('PhoneDetails');
+  },
+};

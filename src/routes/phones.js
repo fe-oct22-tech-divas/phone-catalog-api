@@ -1,6 +1,7 @@
 import express from 'express';
-import * as phoneControllers from '../controllers/phones.js';
+import { phonesControllers } from '../controllers/phones.js';
 
 export const router = express.Router();
-router.get('/', phoneControllers.getAll);
-router.get('/:phoneId', phoneControllers.getById);
+
+router.get('/', phonesControllers.getMany);
+router.get('/:phoneId', phonesControllers.getOne);

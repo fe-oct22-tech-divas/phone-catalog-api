@@ -1,28 +1,61 @@
-'use strict';
-import fs from 'fs/promises';
+import { SortBy } from '../types/SortBy.js';
+import * as Phones from '../../db/models/Phones.js';
 
-async function readData() {
-  const data = await fs.readFile('./src/data/phones.json', 'utf-8');
+function normalize(phone) {
+  const copyOfPhone = { ...phone };
 
-  return JSON.parse(data);
+  delete copyOfPhone.createdAt;
+
+  return copyOfPhone;
 }
 
-export const getAll = async(limit, offset) => {
-  let phones = await readData();
+async function getMany(
+  page,
+  perPage,
+  sortBy,
+) {
+  let loadedData;
 
-  if (limit && offset) {
-    const from = offset;
-    const to = from + limit;
+  switch (sortBy) {
+    case SortBy.Alphabetically:
+      loadedData = await Phones.findAll({
+        order: ['name'],
+        raw: true,
+      });
+      break;
 
-    phones = phones.slice(from, to);
+    case SortBy.Cheapest:
+      loadedData = await Phones.findAll({
+        order: ['price'],
+        raw: true,
+      });
+      break;
+
+    default:
+      loadedData = await Phones.findAll({
+        order: [['year', 'DESC']],
+        raw: true,
+      });
+      break;
   }
 
-  return phones;
-};
+  const phonesToSkip = perPage * (page - 1);
+  const result = loadedData
+    .slice(phonesToSkip, phonesToSkip + perPage)
+    .map(normalize);
 
-export const getById = async(phoneId) => {
-  const phones = await readData();
-  const foundPhone = phones.find((phone) => phone.id === phoneId);
+  return {
+    result,
+    loadedData: loadedData.length,
+  };
+}
 
-  return foundPhone || null;
+function findById(phoneId) {
+  return Phones.findByPk(phoneId);
+}
+
+export const phonesServices = {
+  normalize,
+  getMany,
+  findById,
 };
