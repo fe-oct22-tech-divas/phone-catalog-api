@@ -1,12 +1,12 @@
 import { phonesServices } from '../services/phones.mjs';
 
-const getMany = async(req, res) => {
+const getMany = async (req, res) => {
   const loadPhones = await phonesServices.getMany();
 
   res.send(loadPhones);
 };
 
-const getOne = async(req, res) => {
+const getOne = async (req, res) => {
   const { phoneId } = req.params;
 
   try {

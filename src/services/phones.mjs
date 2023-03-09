@@ -1,4 +1,3 @@
-import { SortBy } from '../types/SortBy.mjs';
 import db from '../../models/index.js';
 
 function normalize(phone) {
@@ -9,41 +8,11 @@ function normalize(phone) {
   return copyOfPhone;
 }
 
-async function getMany(page, perPage, sortBy) {
-  let loadedData;
-
-  switch (sortBy) {
-    case SortBy.Alphabetically:
-      loadedData = await db.Phones.findAll({
-        order: ['name'],
-        raw: true,
-      });
-      break;
-
-    case SortBy.Cheapest:
-      loadedData = await db.Phones.findAll({
-        order: ['price'],
-        raw: true,
-      });
-      break;
-
-    default:
-      loadedData = await db.Phones.findAll({
-        order: [['year', 'DESC']],
-        raw: true,
-      });
-      break;
-  }
-
-  const phonesToSkip = perPage * (page - 1);
-  const result = loadedData
-    .slice(phonesToSkip, phonesToSkip + perPage)
-    .map(normalize);
-
-  return {
-    result,
-    loadedData: loadedData.length,
-  };
+async function getMany() {
+  return db.Phones.findAll({
+    order: ['name'],
+    raw: true,
+  });
 }
 
 function findById(phoneId) {
