@@ -3,7 +3,9 @@ import { phonesServices } from '../services/phones.mjs';
 const getMany = async (req, res) => {
   const loadPhones = await phonesServices.getMany();
 
-  res.send(loadPhones);
+  res.send(phonesServices.normalize(loadPhones.get({ plain: true })));
+
+  return loadPhones;
 };
 
 const getOne = async (req, res) => {
