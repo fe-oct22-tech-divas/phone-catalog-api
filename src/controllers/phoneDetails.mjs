@@ -1,6 +1,6 @@
 import { phoneDetailsServices } from '../services/phoneDetails.mjs';
 
-const getOne = async(req, res) => {
+const getOne = async (req, res) => {
   const { phoneId } = req.params;
 
   try {
@@ -13,7 +13,7 @@ const getOne = async(req, res) => {
     }
 
     res.send(
-      phoneDetailsServices.normalize(findPhoneById.get({ plain: true })),
+      phoneDetailsServices.normalize(findPhoneById.get({ plain: true }))
     );
 
     return findPhoneById;
